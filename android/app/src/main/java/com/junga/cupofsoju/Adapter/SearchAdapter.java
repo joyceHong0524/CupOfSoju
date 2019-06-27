@@ -1,4 +1,4 @@
-package com.junga.cupofsoju;
+package com.junga.cupofsoju.Adapter;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +18,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.junga.cupofsoju.Adapter.RecycleDeco;
 import com.junga.cupofsoju.Adapter.SearchAdapter;
+import com.junga.cupofsoju.R;
 import com.junga.cupofsoju.model.StoreData;
 
 import java.util.ArrayList;

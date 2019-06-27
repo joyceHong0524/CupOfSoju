@@ -110,11 +110,8 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun emailLogin(){
 
-//        val email = input_email.text.toString()
-//        val password = input_password.text.toString()
-
-        val email ="b@naver.com"
-        val password="Rr115500.."
+        val email = input_email.text.toString()
+        val password = input_password.text.toString()
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
             this

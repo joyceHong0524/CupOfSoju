@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     lateinit var navDrawer:Drawer;
     var user : FirebaseUser = FirebaseAuth.getInstance().currentUser!!
     var db = FirebaseFirestore.getInstance()
+    var leftBottle = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,25 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         drawer.setOnClickListener(this)
 
         qrcode.setOnClickListener(this)
+
+        db.collection("User")
+            .whereEqualTo("email", user.email) // <-- This line
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+
+                    val querySnapshot = task.result
+                    val doc = querySnapshot!!.documents.get(0)
+                    val oldUser = doc.toObject(UserData::class.java)
+                    name.setText("${oldUser!!.name}님의")
+                    soju_left.setText("${oldUser.monthLeft}병")
+                    leftBottle = oldUser.monthLeft
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.exception)
+                }
+            }
     }
+
 
 
 
@@ -91,7 +110,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         //TODO need to add header
         navDrawer = DrawerBuilder()
             .withActivity(this)
-            .withAccountHeader(accountHeaderResult)
+//            .withAccountHeader(accountHeaderResult)
             .addDrawerItems(
                 item1,
                 item2,
@@ -154,8 +173,8 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("useremail!!!!",user.email)
-                    var querySnapshot = task.result
-                    var doc = querySnapshot!!.documents.get(0)
+                    val querySnapshot = task.result
+                    val doc = querySnapshot!!.documents.get(0)
 
                     //Get Document ID for updating billing type
                     var docID= doc.id
@@ -191,7 +210,9 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                     "todayLeft" to todayLeft-1,
                     "monthLeft" to monthLeft-1
                 )
-            ).addOnSuccessListener { Log.d(TAG,"succeed") }
+            ).addOnSuccessListener { Log.d(TAG,"succeed")
+            soju_left.setText("${leftBottle-1}병")
+            }
             .addOnFailureListener { Log.d(TAG,"Failed") }
 
         db.collection("Store").document(storeDocId)

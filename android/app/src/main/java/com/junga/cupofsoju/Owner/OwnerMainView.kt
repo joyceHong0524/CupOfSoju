@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.github.mikephil.charting.charts.LineChart
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -113,7 +112,7 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
         //TODO need to add header
         navDrawer = DrawerBuilder()
                 .withActivity(this)
-                .withAccountHeader(accountHeaderResult)
+//                .withAccountHeader(accountHeaderResult)
                 .addDrawerItems(
                         item1,
                         DividerDrawerItem(),
