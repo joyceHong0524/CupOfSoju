@@ -110,7 +110,7 @@ class SignUpStoreActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun updateDatabase(email : String) {
         //TODO need to fix location
-        val storeData:StoreData = StoreData(email,password,storeName,null,0,phone,storeId,null,menu,null, ProjectValue.Companion.NOT_PERMITTED)
+        val storeData:StoreData = StoreData(email,password,storeName,null,0,phone,storeId,null,menu,null, ProjectValue.Companion.NOT_PERMITTED,0)
 
 
         db.collection("Store")

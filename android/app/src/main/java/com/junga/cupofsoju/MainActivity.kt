@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -24,6 +25,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.junga.cupofsoju.model.StoreData
 import com.junga.cupofsoju.model.UserData
 import org.jetbrains.anko.startActivity
 
@@ -130,16 +132,16 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
         if(resultCode == Activity.RESULT_OK){
             val scanResult : IntentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
-            val re = scanResult.contents;
+            val content = scanResult.contents;
 //            Toast.makeText(this,"This is result!!!!!!!"+re,Toast.LENGTH_LONG).show()
-            validCheck()
+            validCheck(content) // this content is storeId
         }else{
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
 
-    private fun validCheck(){
+    private fun validCheck(storeDocId: String){
 
         // TODO :Check if that store number is valid.
 
@@ -166,7 +168,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
 
                     //if todayLeft and monthLeft is bigger than 0, minus -1 and complete to use it.
-                    if(todayLeft>0 && monthLeft>0){updateUserLeft(docID,todayLeft,monthLeft)}else{
+                    if(todayLeft>0 && monthLeft>0){updateUserLeft(docID,todayLeft,monthLeft,storeDocId)}else{
                         Snackbar.make(layout,"사용하실 수 있는 사용권이 없습니다.",Snackbar.LENGTH_SHORT).show()
                     }
 
@@ -182,7 +184,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     }
 
 
-    private fun updateUserLeft(docId : String,todayLeft :Int, monthLeft :Int){
+    private fun updateUserLeft(docId : String,todayLeft :Int, monthLeft :Int,storeDocId :String){
         db.collection("User").document(docId)
             .update(
                 mapOf(
@@ -191,6 +193,26 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                 )
             ).addOnSuccessListener { Log.d(TAG,"succeed") }
             .addOnFailureListener { Log.d(TAG,"Failed") }
+
+        db.collection("Store").document(storeDocId)
+            .get().addOnSuccessListener {
+                var data = it.toObject(StoreData::class.java)
+                   var updated = data!!.soju_count+1
+                db.collection("Store").document(storeDocId)
+                    .update("soju_count",updated)
+                    .addOnSuccessListener {
+                        Log.d(TAG,"Store update succeed")
+                    }
+                    .addOnFailureListener {
+                        Log.d(TAG,"Store update failed")
+                    }
+            }.addOnFailureListener {
+                Log.d(TAG,"Failed")
+            }
+
+
+
+
     }
 
 
