@@ -13,6 +13,7 @@ namespace Client
 {
     public partial class Billing : UserControl
     {
+      
         public Billing()
         {
             InitializeComponent();
@@ -74,7 +75,7 @@ namespace Client
             this.chart1.ChartAreas[0].AxisX.Minimum = 0;
             this.chart1.ChartAreas[0].AxisX.Maximum = 10;
             this.chart1.ChartAreas[0].AxisX.Interval = 1;
-
+            chart1.Series.Clear();
             foreach(var a in stores)
             {
                 try
@@ -93,6 +94,11 @@ namespace Client
         }
 
         private void Billing_Load(object sender, EventArgs e)
+        {
+            StoreParse();
+        }
+
+        private void chart1_DoubleClick(object sender, EventArgs e)
         {
             StoreParse();
         }
