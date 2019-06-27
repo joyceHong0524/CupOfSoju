@@ -1,19 +1,13 @@
 package com.junga.cupofsoju;
 
-<<<<<<< .merge_file_GS6gFw
-public class SearchListActivity {
-=======
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,7 +34,7 @@ public class SearchListActivity extends AppCompatActivity {
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final ArrayList<StoreData> storeInfo = new ArrayList<>();
-        final SearchAdapter myAdapter = new SearchAdapter(storeInfo,this);
+        final SearchAdapter myAdapter = new SearchAdapter(storeInfo, this);
 
 
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -50,14 +44,14 @@ public class SearchListActivity extends AppCompatActivity {
 
         ivSearch = findViewById(R.id.search_search);
         flResult = findViewById(R.id.search_result);
-        etSearchText =  findViewById(R.id.search_edit);
+        etSearchText = findViewById(R.id.search_edit);
         tvResultText = findViewById(R.id.search_text);
 
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 flResult.setLayoutParams(new TableLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 0, 1f));
-                tvResultText.setText("\""+ etSearchText.getText().toString()+"\" 검색결과");
+                tvResultText.setText("\"" + etSearchText.getText().toString() + "\" 검색결과");
                 myAdapter.clear();
                 storeInfo.clear();
                 db.collection("Store")
@@ -68,7 +62,7 @@ public class SearchListActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         StoreData sd = document.toObject(StoreData.class);
-                                        if(sd.getLocation().contains(etSearchText.getText().toString())){
+                                        if (sd.getLocation().contains(etSearchText.getText().toString())) {
                                             storeInfo.add(sd);
                                             myAdapter.notifyDataSetChanged();
                                         }
@@ -80,8 +74,6 @@ public class SearchListActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
         db.collection("Store")
@@ -101,7 +93,5 @@ public class SearchListActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(myAdapter);
         mRecyclerView.addItemDecoration(new RecycleDeco(10));
-
     }
->>>>>>> .merge_file_fWPKiZ
-}
+    }
