@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Google.Cloud.Firestore;
 
 namespace Client
 {
@@ -35,7 +36,7 @@ namespace Client
 
         private void button4_Click(object sender, EventArgs e)
         {
-            billingMange1.BringToFront();
+            billing1.BringToFront();
         }
     }
 }
