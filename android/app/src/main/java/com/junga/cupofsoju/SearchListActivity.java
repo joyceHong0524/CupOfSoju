@@ -35,7 +35,10 @@ public class SearchListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchlist);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final ArrayList<StoreData> storeInfo = new ArrayList<>();
+        final SearchAdapter myAdapter = new SearchAdapter(storeInfo,this);
+
 
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -52,12 +55,30 @@ public class SearchListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 flResult.setLayoutParams(new TableLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 0, 1f));
                 tvResultText.setText("\""+ etSearchText.getText().toString()+"\" 검색결과");
+                myAdapter.clear();
+                storeInfo.clear();
+                db.collection("Store")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        StoreData sd = document.toObject(StoreData.class);
+                                        if(sd.getLocation().contains(etSearchText.getText().toString())){
+                                            storeInfo.add(sd);
+                                            myAdapter.notifyDataSetChanged();
+                                        }
+                                        myAdapter.resetting(storeInfo);
+                                    }
+                                }
+                            }
+                        });
+
             }
         });
 
 
-        final ArrayList<StoreData> storeInfo = new ArrayList<>();
-        final SearchAdapter myAdapter = new SearchAdapter(storeInfo,this);
 
 
         db.collection("Store")
@@ -67,7 +88,6 @@ public class SearchListActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
                                 storeInfo.add(document.toObject(StoreData.class));
                                 myAdapter.notifyDataSetChanged();
                             }

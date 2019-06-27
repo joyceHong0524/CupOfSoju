@@ -72,4 +72,13 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         return storeInfo.size();
     }
+
+    public  void resetting(ArrayList<StoreData>newlist){
+        storeInfo = newlist;
+        notifyDataSetChanged();
+    }
+    public void clear(){
+        storeInfo.clear();
+        notifyDataSetChanged();
+    }
 }
