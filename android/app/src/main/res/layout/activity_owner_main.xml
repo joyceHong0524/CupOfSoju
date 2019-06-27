@@ -1,7 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingTop="15dp"
+              android:paddingRight="15dp"
+              android:paddingLeft="15dp"
+              android:weightSum="10">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:layout_marginLeft="25dp"
+            android:gravity="bottom">
+        <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/menu"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3.4"
+            android:orientation="vertical"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp">
+
+        <TextView
+                android:id="@+id/owner_main_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/sc_6"
+                android:text="이자카야"
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                android:textSize="20dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sc_4"
+                android:text="이 달의 판매량은?"
+                android:textAlignment="textStart"
+                android:textColor="#1a1a1a"
+                android:textSize="20dp"/>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/soju"/>
+            <TextView
+                    android:id="@+id/owner_main_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="528병"
+                    android:gravity="left|bottom"
+                    android:fontFamily="@font/sc_6"
+                    android:textSize="60dp"
+                    android:textColor="#000000"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"/>
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3.7">
+        <ImageView
+                android:id="@+id/owner_main_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chart"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.2"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sc_6"
+                android:text="이 달 예상 환급액"
+                android:textAlignment="center"
+                android:textColor="#3a3a3a"
+                android:textSize="18dp"/>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp">
+
+            <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="#ff69a6"/>
+
+            <TextView
+                    android:id="@+id/owner_main_cashback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sc_6"
+                    android:text="50,000원"
+                    android:textAlignment="center"
+                    android:textColor="#3a3a3a"
+                    android:textSize="40dp"/>
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
