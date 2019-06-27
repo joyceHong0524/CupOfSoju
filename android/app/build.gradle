@@ -63,6 +63,7 @@ dependencies {
 
     //UI library
     implementation "com.mikepenz:materialdrawer:7.0.0-rc01"
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,5 +1,7 @@
 package com.junga.cupofsoju
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,8 +18,11 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(),View.OnClickListener {
 
     val TAG = "MainActivity"
 
@@ -29,11 +34,19 @@ class MainActivity : AppCompatActivity() {
 
         buildDrawer()
 
-        drawer.setOnClickListener(View.OnClickListener {
-            navDrawer.openDrawer()
-        })
+        drawer.setOnClickListener(this)
+
+        qrcode.setOnClickListener(this)
     }
 
+
+
+    override fun onClick(p0: View?) {
+        when(p0!!.id){
+            R.id.drawer -> navDrawer.openDrawer()
+            R.id.qrcode -> getQRcode()
+        }
+    }
 
 
 
@@ -86,6 +99,29 @@ class MainActivity : AppCompatActivity() {
             .withSelectedItem(-1) //This is for making none of items are not selected when it is initialized.
             .build()
 
+    }
 
+    private fun getQRcode(){
+        Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show()
+
+        val integrator = IntentIntegrator(this)
+        integrator.setBeepEnabled(false)
+        integrator.captureActivity = CustomScannerActivity::class.java
+        integrator.initiateScan()
+
+    }
+
+
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(resultCode == Activity.RESULT_OK){
+            val scanResult : IntentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
+            val re = scanResult.contents;
+            Toast.makeText(this,"This is result!!!!!!!"+re,Toast.LENGTH_LONG).show()
+        }else{
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }
