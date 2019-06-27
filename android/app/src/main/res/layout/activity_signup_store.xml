@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+android:id="@+id/layout">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -182,6 +183,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                    android:id="@+id/signup_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
