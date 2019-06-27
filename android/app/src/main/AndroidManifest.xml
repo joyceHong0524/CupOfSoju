@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".SignUpActivity">
         </activity>
+        <activity android:name=".Owner.OwnerMainView"/>
         <activity android:name=".CustomScannerActivity"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -32,7 +33,8 @@
         </activity>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".Adapter.SearchListActivity"/>
+        <activity android:name=".SearchListActivity"/>
+        <activity android:name=".IntroduceActivity"/>
     </application>
 
 </manifest>

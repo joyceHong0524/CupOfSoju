@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed(Runnable {
-           startActivity<LogInActivity>()
+           startActivity<IntroduceActivity>()
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         },2000)
     }

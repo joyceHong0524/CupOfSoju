@@ -23,6 +23,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
+import com.junga.cupofsoju.Owner.OwnerMainView
+import com.junga.cupofsoju.model.UserData
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class LogInActivity : AppCompatActivity(), View.OnClickListener {
@@ -37,16 +41,19 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var editor :SharedPreferences.Editor
 
 
+    lateinit var db : FirebaseFirestore;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
 
-        button_google.setOnClickListener(this)
+//        button_google.setOnClickListener(this)
         button_login.setOnClickListener(this)
         textView_signup.setOnClickListener(this)
 
         mAuth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
@@ -67,7 +74,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
 
         when(p0!!.id){
 
-            R.id.button_google -> googleLogin()
+//            R.id.button_google -> googleLogin()
             R.id.button_login -> emailLogin()
             R.id.textView_signup -> {
                 startActivity<SignUpActivity>()
@@ -102,7 +109,6 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
                 FirebaseAuth.getInstance().signInWithCredential(credential)
                 saveEmailInSharePrferences(account!!.email)
-                startActivity<MainActivity>()
             }
         }
     }
@@ -123,9 +129,8 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d(TAG, "signInWithEmail:onComplete:" + "LOGED IN!!")
                 val user = mAuth.currentUser
                 Log.d(TAG,"current user Id : " + user!!.email)
-
                 saveEmailInSharePrferences(user.email)
-                startActivity<MainActivity>()
+                defineWhereTogo(user)
             }
         }
     }
@@ -135,4 +140,46 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
         editor.putString("email",email)
         editor.apply()
     }
-}
+
+    private fun defineWhereTogo(user : FirebaseUser ){
+
+           db.collection("User")
+               .whereEqualTo("email", user.email) // <-- This line
+               .get()
+               .addOnCompleteListener { task ->
+                   if (task.isSuccessful) {
+
+                       val querySnapshot = task.result
+
+                       if(querySnapshot!!.documents.size != 0){
+                           val doc = querySnapshot!!.documents.get(0)
+                           val oldUser = doc.toObject(UserData::class.java)
+                           startActivity<MainActivity>()
+                       }else{
+                           db.collection("Store")
+                               .whereEqualTo("email", user.email) // <-- This line
+                               .get()
+                               .addOnCompleteListener { task ->
+                                   if (task.isSuccessful) {
+
+                                       val querySnapshot = task.result
+                                       val doc = querySnapshot!!.documents.get(0)
+                                       val oldUser = doc.toObject(com.junga.cupofsoju.model.UserData::class.java)
+                                       startActivity<com.junga.cupofsoju.Owner.OwnerMainView>()
+                                   } else {
+                                       android.util.Log.d(TAG, "Error getting documents: ", task.exception)
+                                   }
+                               }
+                       }
+
+
+
+                   } else {
+                       Log.d(TAG, "Error getting documents: ", task.exception)
+                   }
+               }
+
+
+       }
+    }
+

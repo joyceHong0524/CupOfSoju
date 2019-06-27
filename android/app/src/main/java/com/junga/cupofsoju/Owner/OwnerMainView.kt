@@ -8,29 +8,24 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
-import com.junga.cupofsoju.CustomScannerActivity
 import com.junga.cupofsoju.R
 import com.junga.cupofsoju.model.StoreData
+import com.junga.cupofsoju.model.UserData
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.jvm.internal.markers.KMutableMap
+import kotlinx.android.synthetic.main.activity_owner_main.*
+import kotlinx.android.synthetic.main.activity_owner_main.drawer
 
-import java.util.ArrayList
 
 class OwnerMainView : AppCompatActivity(), View.OnClickListener {
     val TAG = "MainActivity"
@@ -43,7 +38,7 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_owner_main)
         val db = FirebaseFirestore.getInstance()
 
         buildDrawer()
@@ -56,29 +51,47 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
 
         val email = FirebaseAuth.getInstance().currentUser!!.email
 
+//        db.collection("Store")
+//                .get()
+//                .addOnCompleteListener { task ->
+//                    if (task.isSuccessful) {
+//                        Log.d("size :::::",task.result!!.size().toString())
+//                        for (document in task.result!!) {
+//                            val (email1, _, _, _, _, _, _, _, _, _, _, soju_count) = document.toObject(StoreData::class.java)
+//                            if (email1 == email) {
+//                                Log.d("a","Ddfd")
+//
+//                                break
+//                            }
+//
+//                        }
+//                    }
+//                }
+//
+
         db.collection("Store")
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        for (document in task.result!!) {
-                            val (email1, _, _, _, _, _, _, _, _, _, _, soju_count) = document.toObject(StoreData::class.java)
-                            if (email1 == email) {
-                                tvCount.setText(soju_count)
-                                tvCashback.setText(soju_count * 800)
-                                break
-                            }
+            .whereEqualTo("email", email) // <-- This line
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
 
-                        }
-                    }
+                    val querySnapshot = task.result
+                    val doc = querySnapshot!!.documents.get(0)
+                    val oldUser = doc.toObject(StoreData::class.java)
+                    var string = oldUser!!.soju_count.toString()+" 병"
+                    tvCount.setText(string)
+                    tvCashback.setText("${oldUser!!.soju_count * 800}원")
+
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.exception)
                 }
-
+            }
 
     }
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.drawer -> navDrawer.openDrawer()
-            R.id.qrcode -> getQRcode()
         }
     }
 
@@ -99,12 +112,6 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
                 .addProfiles(
                         ProfileDrawerItem().withName("LianJi님").withEmail("soja0524@gmail.com").withIcon(R.drawable.dummy_profile_girl)
                 )
-//            .withAccountHeader(R.layout.activity_main)
-//            .withOnAccountHeaderListener(object : AccountHeader.OnAccountHeaderListener {
-//                override fun onProfileChanged(view: View?, profile: IProfile<*>, current: Boolean): Boolean {
-//                    return false
-//                }
-//            })
                 .build()
 
 
@@ -133,15 +140,7 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun getQRcode() {
-        Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show()
 
-        val integrator = IntentIntegrator(this)
-        integrator.setBeepEnabled(false)
-        integrator.captureActivity = CustomScannerActivity::class.java
-        integrator.initiateScan()
-
-    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
