@@ -95,6 +95,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 val account =result.signInAccount
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
                 FirebaseAuth.getInstance().signInWithCredential(credential)
+                startActivity<MainActivity>()
             }
         }
     }
@@ -102,18 +103,18 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun emailLogin(){
 
-//        val email = input_email.text.toString()
-//        val password = input_password.text.toString()
+        val email = input_email.text.toString()
+        val password = input_password.text.toString()
 
-        val email ="a@naver.com"
-        val password="Rr115500.."
+//        val email ="a@naver.com"
+//        val password="Rr115500.."
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
             this
         ) { task ->
             Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful)
             if (!task.isSuccessful) {
-                Log.d(TAG,"tas k was not successful")
+                Log.d(TAG,"task was not successful")
             } else {
                 Log.d(TAG, "signInWithEmail:onComplete:" + "LOGED IN!!")
                 val user = mAuth.currentUser

@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         navDrawer = DrawerBuilder()
             .withActivity(this)
             .withAccountHeader(accountHeaderResult)
-            .header
             .addDrawerItems(
                 item1,
                 item2,
