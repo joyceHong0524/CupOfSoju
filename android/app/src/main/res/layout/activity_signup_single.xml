@@ -5,29 +5,46 @@
     android:orientation="vertical"
     android:weightSum="10">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="40dp"
         android:layout_weight="1.5">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"/>
 
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12.5dp"
+            android:background="@drawable/gradient_green"></LinearLayout>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Sign Up"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="20dp">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,8 +65,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
+                        android:fontFamily="@font/sc_4"
+                        android:hint="사용할 이메일 *"
+                        android:inputType="text"
+                        android:textSize="12dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/single_nickname_wrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_transparent_bg"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp">
+
+                    <EditText
+                        android:id="@+id/single_nickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sc_4"
+                        android:maxLines="1"
+                        android:hint="닉네임 *"
+                        android:inputType="text"
+                        android:textSize="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,8 +107,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
+                        android:fontFamily="@font/sc_4"
+                        android:hint="비밀번호 *"
+                        android:inputType="textPassword"
+                        android:textSize="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,30 +127,13 @@
                         android:id="@+id/single_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
+                        android:fontFamily="@font/sc_4"
+                        android:hint="이름 *"
+                        android:inputType="text"
+                        android:textSize="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/single_nickname_wrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/button_transparent_bg"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp">
-
-                    <EditText
-                        android:id="@+id/single_nickname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
-
-                </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/single_call_wrapper"
                     android:layout_width="match_parent"
@@ -122,11 +147,14 @@
                         android:id="@+id/single_call"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
+                        android:fontFamily="@font/sc_4"
+                        android:hint="전화번호 (ex. 01012345678) *"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/single_birth_wrapper"
                     android:layout_width="match_parent"
@@ -140,9 +168,11 @@
                         android:id="@+id/single_birth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
+                        android:fontFamily="@font/sc_4"
+                        android:hint="생년월일 (ex. 19990321) *"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textSize="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,9 +189,11 @@
                         android:id="@+id/single_drink"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
+                        android:fontFamily="@font/sc_4"
+                        android:hint="당신의 주량은?"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textSize="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,9 +210,11 @@
                         android:id="@+id/single_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:hint="Name"
-                        android:inputType="text" />
+                        android:fontFamily="@font/sc_4"
+                        android:hint="얼마나 자주 마시나요 1주일에?"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textSize="12dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -189,6 +223,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="40dp"
                     android:background="@drawable/button_transparent_bg"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp">
@@ -197,8 +232,9 @@
                         android:id="@+id/single_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:hint="Name"
+                        android:fontFamily="@font/sc_4"
+                        android:textSize="12dp"
+                        android:hint="어디서 자주 마시나요 (지역)"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -209,8 +245,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
         android:layout_marginBottom="15dp"
         android:layout_weight="1.5">
 
@@ -221,8 +257,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center"
-                android:text="가입하기!" />
+                android:fontFamily="@font/sc_6"
+                android:textColor="#000000"
+                android:textSize="14dp"
+                android:text="가입하기!"
+                android:background="@drawable/btn_greenline"/>
         </LinearLayout>
     </LinearLayout>
 
