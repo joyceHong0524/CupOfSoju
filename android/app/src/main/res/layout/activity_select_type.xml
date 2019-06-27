@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1.5">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp" />
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12.5dp"
+            android:background="@drawable/gradient_green"></LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Sign Up"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="2.8">
+
+        <LinearLayout
+            android:id="@+id/select_single"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/btn_biground_green"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="개인" android:id="@+id/person"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="2.8">
+
+        <LinearLayout
+            android:id="@+id/select_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/btn_biground_green"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="단체" android:id="@+id/group"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="75dp"
+        android:layout_weight="2.8">
+
+        <LinearLayout
+            android:id="@+id/select_store"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginBottom="25dp"
+            android:gravity="center"
+            android:background="@drawable/btn_biground_green"
+            android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="그룹" android:id="@+id/owner"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

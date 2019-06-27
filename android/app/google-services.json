@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "567400774086",
+    "firebase_url": "https://cupofsoju-a47b2.firebaseio.com",
+    "project_id": "cupofsoju-a47b2",
+    "storage_bucket": "cupofsoju-a47b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567400774086:android:a48c3c266a6f4004",
+        "android_client_info": {
+          "package_name": "com.junga.cupofsoju"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567400774086-95imb54tl1bp33g1ng2bsl96kltahh30.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.junga.cupofsoju",
+            "certificate_hash": "a47256501d35e38c3d2b6b44955fcbca0a2ab48d"
+          }
+        },
+        {
+          "client_id": "567400774086-jpid5mh437sh6r0hj0re7m5o7j6r6v1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCudOea2gL_NHpFNMJmlGRhaTRhtymobZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567400774086-jpid5mh437sh6r0hj0re7m5o7j6r6v1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

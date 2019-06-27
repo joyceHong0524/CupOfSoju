@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CupOfSoju</string>
+    <string name="web_client_id" translatable="false">
+        567400774086-jpid5mh437sh6r0hj0re7m5o7j6r6v1q.apps.googleusercontent.com
+    </string>
+    <string name="remained_bottle">LianJi님의\n이달 잔량은,</string>
+</resources>
