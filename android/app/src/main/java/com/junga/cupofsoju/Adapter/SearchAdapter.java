@@ -13,8 +13,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.junga.cupofsoju.Item.StoreItem;
 import com.junga.cupofsoju.R;
+import com.junga.cupofsoju.model.StoreData;
 
 import java.util.ArrayList;
 
@@ -36,9 +36,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private ArrayList<StoreItem> storeInfo;
+    private ArrayList<StoreData> storeInfo;
 
-    public SearchAdapter(ArrayList<StoreItem> storeInfo, Context context) {
+    public SearchAdapter(ArrayList<StoreData> storeInfo, Context context) {
         this.storeInfo = storeInfo;
         this.context = context;
     }
@@ -58,10 +58,10 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
 
-        Glide.with(context).load(storeInfo.get(position).getIcon()).into(myViewHolder.ivPicture);
+        Glide.with(context).load(storeInfo.get(position).getImage()).into(myViewHolder.ivPicture);
         myViewHolder.tvName.setText(storeInfo.get(position).getName());
-        myViewHolder.tvAddress.setText(storeInfo.get(position).getAddress());
-        myViewHolder.tvCall.setText(storeInfo.get(position).getCall());
+        myViewHolder.tvAddress.setText(storeInfo.get(position).getLocation());
+        myViewHolder.tvCall.setText(storeInfo.get(position).getPhone());
 
         myViewHolder.ivPicture.setBackground(new ShapeDrawable(new OvalShape()));
         myViewHolder.ivPicture.setClipToOutline(true);
