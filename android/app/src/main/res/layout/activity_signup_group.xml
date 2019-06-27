@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    android:id="@+id/layout">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -219,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/sc_4"
-                        android:hint="어디서 자주 마시나요(지역) *"
+                        android:hint="어디서 자주 마시나요(지역)"
                         android:inputType="text"
                         android:maxLines="1"
                         android:textSize="12dp" />
@@ -242,6 +243,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/signup_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
