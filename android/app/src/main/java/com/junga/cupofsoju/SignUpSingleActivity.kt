@@ -1,7 +1,10 @@
 package com.junga.cupofsoju
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.service.autofill.UserData
 import android.util.Log
 import android.view.View
@@ -17,6 +20,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.junga.cupofsoju.model.ProjectValue
 import kotlinx.android.synthetic.main.activity_signup_single.*
+import org.jetbrains.anko.startActivity
 
 class SignUpSingleActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -119,11 +123,22 @@ class SignUpSingleActivity : AppCompatActivity(), View.OnClickListener {
                 //여기서 userId는 user doc의 자동생성된 값을 말한다.
                 val userId = it.getId()
                 Log.d(TAG,"USER ID ------------->"+userId)
-            })
+                mHandler.sendEmptyMessage(0)
+
+            }).addOnFailureListener {
+                Log.w(TAG, "Error adding document", it)
+            }
     }
 
 
+    private val mHandler = @SuppressLint("HandlerLeak")
+    object : Handler() {
 
-
+        override fun handleMessage(msg: Message?) {
+            when(msg!!.what){
+                0 -> startActivity<LogInActivity>()
+            }
+        }
+    }
 
 }
