@@ -76,8 +76,8 @@ class BillingActivity : AppCompatActivity(),View.OnClickListener{
                     Log.d(TAG, "Error getting documents: ", task.exception)
                 }
             }
-    }
 
+    }
 
     private fun updateBilling(billing_type: Int,doc_ID:String){
         var todayLeft:Int =0

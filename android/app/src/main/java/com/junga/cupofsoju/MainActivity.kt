@@ -7,6 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -20,6 +24,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.junga.cupofsoju.model.UserData
 import org.jetbrains.anko.startActivity
 
 
@@ -28,6 +33,8 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     val TAG = "MainActivity"
 
     lateinit var navDrawer:Drawer;
+    var user : FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+    var db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,9 +131,67 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         if(resultCode == Activity.RESULT_OK){
             val scanResult : IntentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
             val re = scanResult.contents;
-            Toast.makeText(this,"This is result!!!!!!!"+re,Toast.LENGTH_LONG).show()
+//            Toast.makeText(this,"This is result!!!!!!!"+re,Toast.LENGTH_LONG).show()
+            validCheck()
         }else{
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
+
+    private fun validCheck(){
+
+        // TODO :Check if that store number is valid.
+
+
+        // today, month left
+
+        db.collection("User")
+            .whereEqualTo("email", user.email) // <-- This line
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("useremail!!!!",user.email)
+                    var querySnapshot = task.result
+                    var doc = querySnapshot!!.documents.get(0)
+
+                    //Get Document ID for updating billing type
+                    var docID= doc.id
+
+                    //Need to be deleted
+                    var oldUser = doc.toObject(UserData::class.java)
+                    var todayLeft = oldUser!!.todayLeft
+                    var monthLeft = oldUser!!.monthLeft
+                    Log.d(TAG,"user ${oldUser!!.email}의 old left${oldUser!!.todayLeft}의 아이디디디 $docID")
+
+
+                    //if todayLeft and monthLeft is bigger than 0, minus -1 and complete to use it.
+                    if(todayLeft>0 && monthLeft>0){updateUserLeft(docID,todayLeft,monthLeft)}else{
+                        Snackbar.make(layout,"사용하실 수 있는 사용권이 없습니다.",Snackbar.LENGTH_SHORT).show()
+                    }
+
+
+
+
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.exception)
+                }
+            }
+
+
+    }
+
+
+    private fun updateUserLeft(docId : String,todayLeft :Int, monthLeft :Int){
+        db.collection("User").document(docId)
+            .update(
+                mapOf(
+                    "todayLeft" to todayLeft-1,
+                    "monthLeft" to monthLeft-1
+                )
+            ).addOnSuccessListener { Log.d(TAG,"succeed") }
+            .addOnFailureListener { Log.d(TAG,"Failed") }
+    }
+
+
 }

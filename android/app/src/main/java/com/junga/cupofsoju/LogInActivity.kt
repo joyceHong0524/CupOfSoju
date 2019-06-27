@@ -126,6 +126,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d(TAG, "signInWithEmail:onComplete:" + "LOGED IN!!")
                 val user = mAuth.currentUser
                 Log.d(TAG,"current user Id : " + user!!.email)
+
                 saveEmailInSharePrferences(user.email)
                 startActivity<MainActivity>()
             }

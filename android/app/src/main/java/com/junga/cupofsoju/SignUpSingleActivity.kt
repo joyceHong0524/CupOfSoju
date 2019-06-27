@@ -40,6 +40,9 @@ class SignUpSingleActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var db: FirebaseFirestore;
 
 
+    //SharedPreference for saving uid
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
