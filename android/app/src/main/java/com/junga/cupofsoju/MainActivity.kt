@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //create the drawer and remember the `Drawer` result object
+        //TODO need to add header
         navDrawer = DrawerBuilder()
             .withActivity(this)
             .withAccountHeader(accountHeaderResult)

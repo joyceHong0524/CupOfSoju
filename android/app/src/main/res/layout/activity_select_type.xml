@@ -54,10 +54,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="개인" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="개인" android:id="@+id/person"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -80,10 +80,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="단체" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="단체" android:id="@+id/group"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -107,10 +107,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="그룹" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="그룹" android:id="@+id/owner"/>
         </LinearLayout>
     </LinearLayout>
 
