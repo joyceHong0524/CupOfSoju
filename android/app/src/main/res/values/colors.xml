@@ -147,5 +147,7 @@
     <color name="dark_blue">#00008B</color>
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
+    <color name="login_form_details_light">#1affffff</color>
+    <color name="transparent_black">#34333333</color>
 </resources>
 
