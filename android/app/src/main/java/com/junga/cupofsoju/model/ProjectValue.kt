@@ -13,5 +13,17 @@ class ProjectValue {
         val PERMITTED = 0
         val NOT_PERMITTED = 1
 
+        //It is for billing systme.
+        val SINGLE_BILL_SMALL = 0
+        val SINGLE_BILL_MEDIUM = 1
+        val SINGLE_BILL_LARGE = 2
+
+        val GROUP_BILL_SMALL = 3
+        val GROUP_BILL_MEDIUM = 4
+        val GROUP_BILL_LARGE = 5
+
+
+
+
     }
 }

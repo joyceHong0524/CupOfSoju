@@ -14,7 +14,9 @@ import com.google.firebase.auth.AuthResult
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.OnCompleteListener
 import android.R.attr.password
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.widget.Toast
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -31,6 +33,8 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
     lateinit  var mAuth : FirebaseAuth;
     lateinit var mAuthListener : FirebaseAuth.AuthStateListener;
     lateinit var googleSignInClient: GoogleSignInClient;
+    lateinit var pref: SharedPreferences;
+    lateinit var editor :SharedPreferences.Editor
 
 
 
@@ -53,6 +57,8 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
             }
             // updateUI(user)
         }
+
+        pref = getSharedPreferences("user", Context.MODE_PRIVATE)
 
     }
 
@@ -95,6 +101,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 val account =result.signInAccount
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
                 FirebaseAuth.getInstance().signInWithCredential(credential)
+                saveEmailInSharePrferences(account!!.email)
                 startActivity<MainActivity>()
             }
         }
@@ -106,7 +113,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
 //        val email = input_email.text.toString()
 //        val password = input_password.text.toString()
 
-        val email ="a@naver.com"
+        val email ="b@naver.com"
         val password="Rr115500.."
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
@@ -119,10 +126,16 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d(TAG, "signInWithEmail:onComplete:" + "LOGED IN!!")
                 val user = mAuth.currentUser
                 Log.d(TAG,"current user Id : " + user!!.email)
+                saveEmailInSharePrferences(user.email)
                 startActivity<MainActivity>()
             }
         }
+    }
 
+    private fun saveEmailInSharePrferences(email :String?){
+        editor = pref.edit()
+        editor.putString("email",email)
+        editor.apply()
 
     }
 }

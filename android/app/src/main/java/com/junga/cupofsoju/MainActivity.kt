@@ -20,6 +20,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import org.jetbrains.anko.startActivity
 
 
 class MainActivity : AppCompatActivity(),View.OnClickListener {
@@ -92,7 +93,11 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                     // do something with the clicked item :D
-                    Log.d(TAG,position.toString())
+                    when(position){
+                        0->startActivity<BillingActivity>()
+                        1->startActivity<BillingActivity>()
+                        2->startActivity<BillingActivity>()
+                    }
                     return false
                 }
             })
