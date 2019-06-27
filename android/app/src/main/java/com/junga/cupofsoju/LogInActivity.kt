@@ -137,6 +137,5 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
         editor = pref.edit()
         editor.putString("email",email)
         editor.apply()
-
     }
 }

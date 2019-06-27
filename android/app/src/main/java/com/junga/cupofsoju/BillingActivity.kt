@@ -161,11 +161,24 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
 
 
     //Billing Recommend Algorithm
-    private fun recommendBilling(howMuch : Int,howMany: Int){
+    private fun recommendBilling(howMuch : Int,howMany: Int) : Int{
         // Explanation
         // This app aims to make people drink more frequently with reasonable price, not to make them drink a lot.
         // So We decided to put weight on the parameter "How many time do you drink in a week?"
-
-
+        var point1 = howMuch*3
+        var point2 = when(howMany){
+            0-> 10 // 1-2회
+            1-> 15 // 3-4회
+            2-> 22 // 5회 이상
+            else -> 0
+        }
+        var sum = point1+point2
+            if(0<sum && sum<20){
+                return ProjectValue.Companion.SINGLE_BILL_SMALL
+            }else if (sum>=20 && sum<30){
+                return ProjectValue.Companion.SINGLE_BILL_MEDIUM
+            }else{
+                return ProjectValue.Companion.SINGLE_BILL_LARGE
+            }
     }
 }
