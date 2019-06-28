@@ -13,7 +13,10 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed(Runnable {
            startActivity<IntroduceActivity>()
+
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
+            finish()
+
         },2000)
     }
 }

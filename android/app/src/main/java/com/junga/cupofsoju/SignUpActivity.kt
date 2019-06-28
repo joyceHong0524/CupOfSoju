@@ -20,9 +20,22 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0!!.id){
-            R.id.person -> startActivity<SignUpSingleActivity>()
-            R.id.group -> startActivity<SignUpGroupActivity>()
-            R.id.owner -> startActivity<SignUpStoreActivity>()
+            R.id.person -> {
+                startActivity<SignUpSingleActivity>()
+                finish()
+            }
+            R.id.group -> {
+                startActivity<SignUpGroupActivity>()
+            }
+            R.id.owner -> {
+                startActivity<SignUpStoreActivity>()
+                finish()
+            }
         }
+    }
+
+    override fun onBackPressed() {
+
+        startActivity<SplashActivity>()
     }
 }

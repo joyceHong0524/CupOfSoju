@@ -133,9 +133,17 @@ class SignUpStoreActivity : AppCompatActivity(),View.OnClickListener {
 
         override fun handleMessage(msg: Message?) {
             when(msg!!.what){
-                0 -> startActivity<LogInActivity>()
+                0 -> {
+                    startActivity<LogInActivity>()
+                    finish()
+
+                }
             }
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity<SplashActivity>()
     }
 
 }

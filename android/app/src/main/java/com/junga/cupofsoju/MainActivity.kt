@@ -1,6 +1,8 @@
 package com.junga.cupofsoju
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +27,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.junga.cupofsoju.model.ProjectValue
 import com.junga.cupofsoju.model.StoreData
 import com.junga.cupofsoju.model.UserData
 import org.jetbrains.anko.startActivity
@@ -67,6 +70,11 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             }
     }
 
+    override fun onResume() {
+        super.onResume()
+        refresh()
+    }
+
 
 
 
@@ -83,7 +91,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
         val item1 = PrimaryDrawerItem().withIdentifier(1).withName("요금제 변경")
         val item2 = PrimaryDrawerItem().withIdentifier(2).withName("가맹 리스트")
-        val item3 = PrimaryDrawerItem().withIdentifier(3).withName("회원정보 수정")
+//        val item3 = PrimaryDrawerItem().withIdentifier(3).withName("회원정보 수정")
         val item4 = SecondaryDrawerItem().withIdentifier(4).withName("로그아웃")
 
 
@@ -114,7 +122,6 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             .addDrawerItems(
                 item1,
                 item2,
-                item3,
                 DividerDrawerItem(),
                 item4
             )
@@ -123,8 +130,15 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
                     // do something with the clicked item :D
                     when(position){
                         0->startActivity<BillingActivity>()
-                        1->startActivity<BillingActivity>()
-                        2->startActivity<BillingActivity>()
+                        1->startActivity<SearchListActivity>()
+                        2->{
+                            FirebaseAuth.getInstance().signOut()
+                            startActivity<LogInActivity>()
+                        }
+                        3->{
+                            FirebaseAuth.getInstance().signOut()
+                            startActivity<LogInActivity>()
+                        }
                     }
                     return false
                 }
@@ -153,18 +167,48 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
             val scanResult : IntentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data)
             val content = scanResult.contents;
 //            Toast.makeText(this,"This is result!!!!!!!"+re,Toast.LENGTH_LONG).show()
-            validCheck(content) // this content is storeId
+            val dialog = AlertDialog.Builder(this)
+            dialog.setMessage("결제 하시겠습니까??")
+                .setCancelable(false)
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+                    validCheck(content) // this content is storeId
+                    dialogInterface.cancel()
+                    refresh()
+                })
+                .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                    dialogInterface.cancel()
+                })
+            val alert = dialog.create()
+            alert.show()
+
         }else{
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
 
+    private fun refresh(){
+        db.collection("User")
+            .whereEqualTo("email", user.email) // <-- This line
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+
+                    val querySnapshot = task.result
+                    val doc = querySnapshot!!.documents.get(0)
+                    val oldUser = doc.toObject(UserData::class.java)
+                    name.setText("${oldUser!!.name}님의")
+                    soju_left.setText("${oldUser.monthLeft}병")
+                    leftBottle = oldUser.monthLeft
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.exception)
+                }
+            }
+    }
+
     private fun validCheck(storeDocId: String){
 
         // TODO :Check if that store number is valid.
-
-
         // today, month left
 
         db.collection("User")
@@ -234,6 +278,21 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
 
 
+    }
+
+    override fun onBackPressed() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setMessage("종료 하시겠습니까??")
+            .setCancelable(false)
+            .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+                finish()
+                dialogInterface.cancel()
+            })
+            .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                dialogInterface.cancel()
+            })
+        val alert = dialog.create()
+        alert.show()
     }
 
 

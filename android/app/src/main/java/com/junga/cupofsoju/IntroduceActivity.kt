@@ -21,8 +21,14 @@ import java.util.ArrayList
 class IntroduceActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0!!.id){
-            R.id.intro_login -> startActivity<LogInActivity>()
-            R.id.intro_signUp -> startActivity<SignUpActivity>()
+            R.id.intro_login -> {
+                startActivity<LogInActivity>()
+                finish()
+            }
+            R.id.intro_signUp -> {
+                startActivity<SignUpActivity>()
+                finish()
+            }
         }
     }
 
@@ -48,6 +54,8 @@ class IntroduceActivity : AppCompatActivity(),View.OnClickListener {
         intro_signUp.setOnClickListener(this)
 
     }
+
+
 }
 
 

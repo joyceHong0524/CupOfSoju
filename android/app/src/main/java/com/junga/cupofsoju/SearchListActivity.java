@@ -94,4 +94,10 @@ public class SearchListActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(myAdapter);
         mRecyclerView.addItemDecoration(new RecycleDeco(10));
     }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
     }
+}

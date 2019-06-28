@@ -1,8 +1,11 @@
 package com.junga.cupofsoju
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -20,6 +23,7 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var auth: FirebaseAuth;
     lateinit var user: FirebaseUser;
     var type: Int = 0;
+    var groupPriceToggle = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +33,7 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
         bill1.setOnClickListener(this)
         bill2.setOnClickListener(this)
         bill3.setOnClickListener(this)
+        group_price.setOnClickListener(this)
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance()
@@ -45,16 +50,84 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
 
         when (p0!!.id) {
             R.id.bill1 -> {
-                if (type == ProjectValue.Companion.SINGLE) registerBilling(ProjectValue.Companion.SINGLE_BILL_SMALL)
-                else registerBilling(ProjectValue.Companion.GROUP_BILL_SMALL)
+
+                val dialog = AlertDialog.Builder(this)
+                dialog.setMessage("요금제를 신청 하시겠습니까??")
+                    .setCancelable(false)
+                    .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+
+                        if (type == ProjectValue.Companion.SINGLE) registerBilling(ProjectValue.Companion.SINGLE_BILL_SMALL)
+                        else registerBilling(ProjectValue.Companion.GROUP_BILL_SMALL)
+                        dialogInterface.cancel()
+                    })
+                    .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                        dialogInterface.cancel()
+                    })
+                val alert = dialog.create()
+                alert.show()
             }
             R.id.bill2 -> {
-                if (type == ProjectValue.Companion.SINGLE) registerBilling(ProjectValue.Companion.SINGLE_BILL_MEDIUM)
-                else registerBilling(ProjectValue.Companion.GROUP_BILL_MEDIUM)
+
+                val dialog = AlertDialog.Builder(this)
+                dialog.setMessage("요금제를 신청 하시겠습니까??")
+                    .setCancelable(false)
+                    .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+
+                        if (type == ProjectValue.Companion.SINGLE) registerBilling(ProjectValue.Companion.SINGLE_BILL_MEDIUM)
+                        else registerBilling(ProjectValue.Companion.GROUP_BILL_MEDIUM)
+                        dialogInterface.cancel()
+                    })
+                    .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                        dialogInterface.cancel()
+                    })
+                val alert = dialog.create()
+                alert.show()
             }
             R.id.bill3 -> {
-                if (type == ProjectValue.Companion.SINGLE) registerBilling(ProjectValue.Companion.SINGLE_BILL_LARGE)
-                else registerBilling(ProjectValue.Companion.GROUP_BILL_LARGE)
+
+                val dialog = AlertDialog.Builder(this)
+                dialog.setMessage("요금제를 신청 하시겠습니까??")
+                    .setCancelable(false)
+                    .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+
+                        if (type == ProjectValue.Companion.SINGLE) registerBilling(ProjectValue.Companion.SINGLE_BILL_LARGE)
+                        else registerBilling(ProjectValue.Companion.GROUP_BILL_LARGE)
+                        dialogInterface.cancel()
+                    })
+                    .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                        dialogInterface.cancel()
+                    })
+                val alert = dialog.create()
+                alert.show()
+
+            }
+            R.id.group_price ->{
+                if(!groupPriceToggle){
+                price1.setText("52000원")
+                price2.setText("69000원")
+                price3.setText("78000원")
+
+
+                    c1.setText(R.string.s1)
+                    c2.setText(R.string.s2)
+                    c3.setText(R.string.s3)
+                recommendation.setText(R.string.single_reco)
+                    group_price.setText("단체")
+                    groupPriceToggle = true
+                }else{
+                    price1.setText("19000원")
+                    price2.setText("22000원")
+                    price3.setText("29000원")
+                    recommendation.setText(R.string.group_reco)
+
+
+                    c1.setText(R.string.g1)
+                    c2.setText(R.string.g2)
+                    c3.setText(R.string.g3)
+                    group_price.setText("개인")
+                    groupPriceToggle = false
+                }
+
             }
         }
     }
@@ -94,11 +167,11 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
         when (billing_type) {
             ProjectValue.Companion.SINGLE_BILL_SMALL -> {
                 todayLeft = 1
-                monthLeft = 20
+                monthLeft = 10
             }
             ProjectValue.Companion.SINGLE_BILL_MEDIUM -> {
                 todayLeft = 2
-                monthLeft = 30
+                monthLeft = 40
             }
             ProjectValue.Companion.SINGLE_BILL_LARGE -> {
                 todayLeft = 3
@@ -106,28 +179,29 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
             }
             ProjectValue.Companion.GROUP_BILL_SMALL -> {
                 todayLeft = 10
-                monthLeft = 200
+                monthLeft = 60
             }
             ProjectValue.Companion.GROUP_BILL_MEDIUM -> {
-                todayLeft = 20
-                monthLeft = 300
+                todayLeft = 14
+                monthLeft = 80
             }
             ProjectValue.Companion.GROUP_BILL_LARGE -> {
-                todayLeft = 30
-                monthLeft = 500
+                todayLeft = 20
+                monthLeft = 140
             }
         }
 
         db.collection("User").document(doc_ID)
             .update(
                 mapOf(
-                    "type" to billing_type,
+                    "bill" to billing_type,
                     "todayLeft" to todayLeft,
                     "monthLeft" to monthLeft
                 )
 
             ).addOnSuccessListener {
                 Log.d(TAG, "All updated")
+                Toast.makeText(this,"요금제가 업데이트 되었습니다.",Toast.LENGTH_LONG).show()
             }.addOnFailureListener {
                 Log.d(TAG, "Failed")
             }
@@ -141,7 +215,9 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("useremail!!!!", user.email)
+
                     val querySnapshot = task.result
+                    if(querySnapshot!!.documents.size!=0){
                     val doc = querySnapshot!!.documents.get(0)
                     val oldUser = doc.toObject(UserData::class.java)
                     type = oldUser!!.type
@@ -152,6 +228,7 @@ class BillingActivity : AppCompatActivity(), View.OnClickListener {
                         1 -> {
                             Log.d(TAG,"type1")
                         }
+                    }
                     }
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.exception)

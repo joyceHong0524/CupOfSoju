@@ -34,17 +34,17 @@
         app:layout_constraintGuide_percent="0.60" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/sc_1"
-        android:text="@string/bill1"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.33"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+            android:id="@+id/recommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/sc_1"
+            android:text="@string/single_reco"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintHorizontal_bias="0.33"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -158,19 +158,19 @@
                 app:layout_constraintVertical_bias="0.508" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/sc_6"
-                android:text="1일 1병,월 총10병"
-                android:textColor="@color/grey"
-                android:textSize="6sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
-                app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/sc_6"
+                    android:text="@string/s1"
+                    android:textColor="@color/grey"
+                    android:textSize="6sp"
+                    app:layout_constraintBottom_toTopOf="@+id/price1"
+                    app:layout_constraintEnd_toEndOf="parent" android:id="@+id/c1"/>
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/price1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
@@ -217,19 +217,19 @@
                 app:layout_constraintVertical_bias="0.508" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/sc_6"
-                android:text="1일 2병,월 총40병"
-                android:textColor="@color/grey"
-                android:textSize="6sp"
-                app:layout_constraintBottom_toTopOf="@+id/textVie3"
-                app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/sc_6"
+                    android:text="@string/s2"
+                    android:textColor="@color/grey"
+                    android:textSize="6sp"
+                    app:layout_constraintBottom_toTopOf="@+id/price2"
+                    app:layout_constraintEnd_toEndOf="parent" android:id="@+id/c2"/>
 
             <TextView
-                android:id="@+id/textVie3"
+                android:id="@+id/price2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
@@ -275,19 +275,19 @@
                 app:layout_constraintVertical_bias="0.508" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/sc_6"
-                android:text="1일 3병,월 총50병"
-                android:textColor="@color/grey"
-                android:textSize="6sp"
-                app:layout_constraintBottom_toTopOf="@+id/textVie1"
-                app:layout_constraintEnd_toEndOf="parent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/sc_6"
+                    android:text="@string/s3"
+                    android:textColor="@color/grey"
+                    android:textSize="6sp"
+                    app:layout_constraintBottom_toTopOf="@+id/price3"
+                    app:layout_constraintEnd_toEndOf="parent" android:id="@+id/c3"/>
 
             <TextView
-                android:id="@+id/textVie1"
+                android:id="@+id/price3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
@@ -312,4 +312,13 @@
 
 
     </LinearLayout>
+    <TextView
+            android:text="단체"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:id="@+id/group_price"
+            android:fontFamily="@font/sc_4"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

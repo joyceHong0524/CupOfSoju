@@ -12,7 +12,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.junga.cupofsoju.BillingActivity
+import com.junga.cupofsoju.LogInActivity
 import com.junga.cupofsoju.R
+import com.junga.cupofsoju.SearchListActivity
 import com.junga.cupofsoju.model.StoreData
 import com.junga.cupofsoju.model.UserData
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -25,6 +28,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_owner_main.*
 import kotlinx.android.synthetic.main.activity_owner_main.drawer
+import org.jetbrains.anko.startActivity
 
 
 class OwnerMainView : AppCompatActivity(), View.OnClickListener {
@@ -87,6 +91,25 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
                 }
             }
 
+        owner_main_count.setOnClickListener {
+            db.collection("Store")
+                .whereEqualTo("email", email) // <-- This line
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+
+                        val querySnapshot = task.result
+                        val doc = querySnapshot!!.documents.get(0)
+                        val oldUser = doc.toObject(StoreData::class.java)
+                        var string = oldUser!!.soju_count.toString()+" 병"
+                        tvCount.setText(string)
+                        tvCashback.setText("${oldUser!!.soju_count * 800}원")
+
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.exception)
+                    }
+                }
+        }
     }
 
     override fun onClick(p0: View?) {
@@ -98,7 +121,7 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
 
     private fun buildDrawer() {
 
-        val item1 = PrimaryDrawerItem().withIdentifier(1).withName("회원정보 수정")
+        val item1 = PrimaryDrawerItem().withIdentifier(1).withName("요금제 보기")
         val item2 = PrimaryDrawerItem().withIdentifier(2).withName("로그아웃")
         val item3 = PrimaryDrawerItem().withIdentifier(3).withName("가맹 탈퇴")
 
@@ -128,13 +151,20 @@ class OwnerMainView : AppCompatActivity(), View.OnClickListener {
                         item3,
                         DividerDrawerItem()
                 )
-                .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
-                    override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                        // do something with the clicked item :D
-                        Log.d(TAG, position.toString())
-                        return false
+            .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
+                override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                    // do something with the clicked item :D
+                    when(position){
+                        0->startActivity<BillingActivity>()
+                        1->startActivity<SearchListActivity>()
+                        2->{
+                            FirebaseAuth.getInstance().signOut()
+                            startActivity<LogInActivity>()
+                        }
                     }
-                })
+                    return false
+                }
+            })
                 .withSelectedItem(-1) //This is for making none of items are not selected when it is initialized.
                 .build()
 
