@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+<<<<<<< HEAD
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+=======
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listView2 = new System.Windows.Forms.ListView();
@@ -42,7 +45,11 @@
             this.Lv_Image = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Lv_Menu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Lv_Size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+<<<<<<< HEAD
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+=======
+            this.button2 = new System.Windows.Forms.Button();
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.SuspendLayout();
             // 
             // label1
@@ -54,6 +61,7 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "허가";
             // 
+<<<<<<< HEAD
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(541, 56);
@@ -65,13 +73,22 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(541, 220);
+=======
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 165);
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(114, 25);
             this.textBox1.TabIndex = 3;
             // 
             // button1
             // 
+<<<<<<< HEAD
             this.button1.Location = new System.Drawing.Point(542, 260);
+=======
+            this.button1.Location = new System.Drawing.Point(3, 196);
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 27);
             this.button1.TabIndex = 4;
@@ -91,9 +108,16 @@
             this.Lv_Image,
             this.Lv_Menu,
             this.Lv_Size});
+<<<<<<< HEAD
             this.listView2.Location = new System.Drawing.Point(39, 56);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(447, 228);
+=======
+            this.listView2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.listView2.Location = new System.Drawing.Point(181, 0);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(506, 372);
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.listView2.TabIndex = 5;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -135,10 +159,24 @@
             // 
             this.Lv_Size.Text = "Size";
             // 
+<<<<<<< HEAD
+=======
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(3, 230);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(116, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "새로고침";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             // Permission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
@@ -147,6 +185,16 @@
             this.Name = "Permission";
             this.Size = new System.Drawing.Size(697, 357);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+=======
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.listView2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
+            this.Name = "Permission";
+            this.Size = new System.Drawing.Size(687, 372);
+            this.Load += new System.EventHandler(this.Permission_Load);
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,7 +202,10 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
+<<<<<<< HEAD
         private System.Windows.Forms.PictureBox pictureBox1;
+=======
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listView2;
@@ -167,5 +218,9 @@
         private System.Windows.Forms.ColumnHeader Lv_Image;
         private System.Windows.Forms.ColumnHeader Lv_Menu;
         private System.Windows.Forms.ColumnHeader Lv_Size;
+<<<<<<< HEAD
+=======
+        private System.Windows.Forms.Button button2;
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
     }
 }

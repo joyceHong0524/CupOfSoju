@@ -32,10 +32,17 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.storeList1 = new Client.StoreList();
             this.permission1 = new Client.Permission();
             this.memberManage1 = new Client.MemberManage();
             this.billingMange1 = new Client.BillingMange();
+=======
+            this.memberManage1 = new Client.MemberManage();
+            this.permission1 = new Client.Permission();
+            this.storeList1 = new Client.StoreList();
+            this.billing1 = new Client.Billing();
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.SuspendLayout();
             // 
             // button1
@@ -78,6 +85,7 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+<<<<<<< HEAD
             // storeList1
             // 
             this.storeList1.Location = new System.Drawing.Point(118, 43);
@@ -105,13 +113,47 @@
             this.billingMange1.Name = "billingMange1";
             this.billingMange1.Size = new System.Drawing.Size(599, 325);
             this.billingMange1.TabIndex = 6;
+=======
+            // memberManage1
+            // 
+            this.memberManage1.Location = new System.Drawing.Point(114, 1);
+            this.memberManage1.Name = "memberManage1";
+            this.memberManage1.Size = new System.Drawing.Size(687, 372);
+            this.memberManage1.TabIndex = 5;
+            // 
+            // permission1
+            // 
+            this.permission1.Location = new System.Drawing.Point(114, 1);
+            this.permission1.Name = "permission1";
+            this.permission1.Size = new System.Drawing.Size(687, 372);
+            this.permission1.TabIndex = 4;
+            // 
+            // storeList1
+            // 
+            this.storeList1.Location = new System.Drawing.Point(114, 1);
+            this.storeList1.Name = "storeList1";
+            this.storeList1.Size = new System.Drawing.Size(687, 372);
+            this.storeList1.TabIndex = 3;
+            // 
+            // billing1
+            // 
+            this.billing1.Location = new System.Drawing.Point(114, 1);
+            this.billing1.Name = "billing1";
+            this.billing1.Size = new System.Drawing.Size(687, 372);
+            this.billing1.TabIndex = 6;
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.billingMange1);
+=======
+            this.ClientSize = new System.Drawing.Size(800, 404);
+            this.Controls.Add(this.billing1);
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.Controls.Add(this.memberManage1);
             this.Controls.Add(this.permission1);
             this.Controls.Add(this.storeList1);
@@ -134,7 +176,11 @@
         private StoreList storeList1;
         private Permission permission1;
         private MemberManage memberManage1;
+<<<<<<< HEAD
         private BillingMange billingMange1;
+=======
+        private Billing billing1;
+>>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
     }
 }
 
