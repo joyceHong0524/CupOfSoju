@@ -4,4 +4,13 @@
         567400774086-jpid5mh437sh6r0hj0re7m5o7j6r6v1q.apps.googleusercontent.com
     </string>
     <string name="remained_bottle">LianJi님의\n이달 잔량은,</string>
+    <string name="single_reco">1일 한병\n월 최대 20병!</string>
+    <string name="group_reco">1일 10병\n월 최대 60병!</string>
+    <string name="s1">1일 1병 월10병</string>
+    <string name="s2">1일 2병 월40병</string>
+    <string name="s3">1일 3병 월50병</string>
+    <string name="g1">1일 10병 월60병</string>
+    <string name="g2">1일 14병 월80병</string>
+    <string name="g3">1일 20병 월1400병</string>
+
 </resources>

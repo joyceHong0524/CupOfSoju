@@ -1,65 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+<!--Licensed under the Apache License, Version 2.0 (the "License"); you may -->
+<!--not use this file except in compliance with the License. You may obtain -->
+<!--a copy of the License at-->
+<!--http://www.apache.org/licenses/LICENSE-2.0-->
 
-    <ImageView
-            android:id="@+id/logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/dummy_login"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintStart_toEndOf="@+id/textView2"/>
+<!--Unless required by applicable law or agreed to in writing, software-->
+<!--distributed under the License is distributed on an "AS IS" BASIS,-->
+<!--WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. -->
+<!--See the License for the specific language governing permissions and limitations under the License.-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingTop="15dp"
+              android:paddingRight="15dp"
+              android:paddingLeft="15dp"
+              android:weightSum="10"
+android:id="@+id/layout">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="140dp"
-        android:fontFamily="@font/sc_6"
-        android:text="@string/remained_bottle"
-        android:textColor="@color/grey"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:layout_marginLeft="25dp"
+            android:gravity="bottom">
+        <ImageView
+                android:id="@+id/drawer"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/menu"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/sc_6"
-        android:text="27병"
-        android:textColor="@color/black"
-        android:textSize="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3.4"
+            android:orientation="vertical"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp">
 
-    <ImageView
-            android:id="@+id/drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu_black_24dp"/>
+        <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/sc_6"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                android:textSize="20dp"/>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@drawable/qr" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sc_4"
+                android:text="이 달의 소주잔량은?"
+                android:textAlignment="textStart"
+                android:textColor="#1a1a1a"
+                android:textSize="20dp"/>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/soju"/>
+            <TextView
+                    android:id="@+id/soju_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="..."
+                    android:gravity="left|bottom"
+                    android:fontFamily="@font/sc_6"
+                    android:textSize="60dp"
+                    android:textColor="#000000"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="5dp"/>
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/qrcode"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:src="@drawable/qr_code_btn"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

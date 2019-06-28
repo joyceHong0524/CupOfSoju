@@ -1,26 +1,47 @@
 package com.junga.cupofsoju
 
+
+//Copyright 2019 Hanjanha Jo
+//
+//
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+//file except in compliance with the License. You may obtain a copy of the License at
+//http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing, software distributed
+//under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+//express or implied. See the License for the specific language governing permissions and limitations under the License.
+//
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_log_in.*
 import org.jetbrains.anko.startActivity
-import com.google.firebase.auth.FirebaseUser
 import androidx.annotation.NonNull
 import android.graphics.Color.DKGRAY
-import com.google.firebase.auth.AuthResult
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.OnCompleteListener
 import android.R.attr.password
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.junga.cupofsoju.Owner.OwnerMainView
+import com.junga.cupofsoju.model.UserData
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_signup_single.*
 
 
 class LogInActivity : AppCompatActivity(), View.OnClickListener {
@@ -31,19 +52,24 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
     lateinit  var mAuth : FirebaseAuth;
     lateinit var mAuthListener : FirebaseAuth.AuthStateListener;
     lateinit var googleSignInClient: GoogleSignInClient;
+    lateinit var pref: SharedPreferences;
+    lateinit var editor :SharedPreferences.Editor
+    lateinit var layout : LinearLayout
 
+    lateinit var db : FirebaseFirestore;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
 
-        button_google.setOnClickListener(this)
+//        button_google.setOnClickListener(this)
         button_login.setOnClickListener(this)
         textView_signup.setOnClickListener(this)
 
         mAuth = FirebaseAuth.getInstance()
-
+        db = FirebaseFirestore.getInstance()
+        layout = findViewById(R.id.layout)
         mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
             if (user != null) {
@@ -54,6 +80,8 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
             // updateUI(user)
         }
 
+        pref = getSharedPreferences("user", Context.MODE_PRIVATE)
+
     }
 
 
@@ -61,7 +89,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
 
         when(p0!!.id){
 
-            R.id.button_google -> googleLogin()
+//            R.id.button_google -> googleLogin()
             R.id.button_login -> emailLogin()
             R.id.textView_signup -> {
                 startActivity<SignUpActivity>()
@@ -95,7 +123,7 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 val account =result.signInAccount
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
                 FirebaseAuth.getInstance().signInWithCredential(credential)
-                startActivity<MainActivity>()
+                saveEmailInSharePrferences(account!!.email)
             }
         }
     }
@@ -103,11 +131,8 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun emailLogin(){
 
-//        val email = input_email.text.toString()
-//        val password = input_password.text.toString()
-
-        val email ="a@naver.com"
-        val password="Rr115500.."
+        val email = input_email.text.toString()
+        val password = input_password.text.toString()
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
             this
@@ -119,10 +144,74 @@ class LogInActivity : AppCompatActivity(), View.OnClickListener {
                 Log.d(TAG, "signInWithEmail:onComplete:" + "LOGED IN!!")
                 val user = mAuth.currentUser
                 Log.d(TAG,"current user Id : " + user!!.email)
-                startActivity<MainActivity>()
+                saveEmailInSharePrferences(user.email)
+                defineWhereTogo(user)
             }
+        }.addOnFailureListener {
+                Snackbar.make(layout,"입력 정보를 다시 확인해주세요", Snackbar.LENGTH_SHORT).show()
         }
+    }
 
+    private fun saveEmailInSharePrferences(email :String?){
+        editor = pref.edit()
+        editor.putString("email",email)
+        editor.apply()
+    }
+
+    private fun defineWhereTogo(user : FirebaseUser ){
+
+           db.collection("User")
+               .whereEqualTo("email", user.email) // <-- This line
+               .get()
+               .addOnCompleteListener { task ->
+                   if (task.isSuccessful) {
+
+                       val querySnapshot = task.result
+
+                       if(querySnapshot!!.documents.size != 0){
+                           val doc = querySnapshot!!.documents.get(0)
+                           val oldUser = doc.toObject(UserData::class.java)
+                           startActivity<MainActivity>()
+                       }else{
+                           db.collection("Store")
+                               .whereEqualTo("email", user.email) // <-- This line
+                               .get()
+                               .addOnCompleteListener { task ->
+                                   if (task.isSuccessful) {
+                                       val querySnapshot = task.result
+                                       val doc = querySnapshot!!.documents.get(0)
+                                       val oldUser = doc.toObject(com.junga.cupofsoju.model.UserData::class.java)
+                                       startActivity<com.junga.cupofsoju.Owner.OwnerMainView>()
+                                   } else {
+                                       android.util.Log.d(TAG, "Error getting documents: ", task.exception)
+                                   }
+                               }
+                       }
+
+
+
+                   } else {
+                       Log.d(TAG, "Error getting documents: ", task.exception)
+                   }
+               }
+
+
+       }
+
+    override fun onBackPressed() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setMessage("종료 하시겠습니까??")
+            .setCancelable(false)
+            .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+                finish()
+                dialogInterface.cancel()
+            })
+            .setNegativeButton("취소", DialogInterface.OnClickListener { dialogInterface, i ->
+                dialogInterface.cancel()
+            })
+        val alert = dialog.create()
+        alert.show()
 
     }
-}
+    }
+
