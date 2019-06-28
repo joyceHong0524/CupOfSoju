@@ -88,12 +88,38 @@ namespace Client
             QuerySnapshot snapshot = await usersRef.GetSnapshotAsync();
             foreach (DocumentSnapshot document in snapshot.Documents)
             {
+                int id=0;
                 DocumentReference cityRef = db.Collection("User").Document(document.Id);
+                Dictionary<string, object> documentDictionary = document.ToDictionary();
+                switch (int.Parse(documentDictionary["bill"].ToString()))
+                {
+                    case 0:
+                        id = 1;
+                        break;
+                    case 1:
+                        id = 2;
+                        break;
+                    case 2:
+                        id = 3;
+                        break;
+                    case 3:
+                        id = 10;
+                        break;
+                    case 4:
+                        id = 14;
+                        break;
+                    case 5:
+                        id = 20;
+                        break;
+                        
+                }
+                
+               
 
                 // Update age and favorite color
                 Dictionary<string, object> updates = new Dictionary<string, object>
                     {
-                        { "todayLeft", 0},
+                        { "todayLeft", id},
                     };
 
                 // Asynchronously update the document

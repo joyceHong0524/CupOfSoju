@@ -95,7 +95,7 @@ namespace Client
                 await cityRef.DeleteAsync();
             }
             MessageBox.Show("삭제 완료");
-            //StoreParse();
+            StoreParse();
         }
         #endregion
 
