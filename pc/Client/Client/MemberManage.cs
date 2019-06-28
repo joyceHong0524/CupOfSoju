@@ -7,20 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-<<<<<<< HEAD
-=======
 using Google.Cloud.Firestore;
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
 
 namespace Client
 {
     public partial class MemberManage : UserControl
     {
-<<<<<<< HEAD
-        public MemberManage()
-        {
-            InitializeComponent();
-=======
         List<User> users = new List<User>();
         public MemberManage()
         {
@@ -157,7 +149,6 @@ namespace Client
         private void MemberManage_Load(object sender, EventArgs e)
         {
             UserParse();
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         }
     }
 }

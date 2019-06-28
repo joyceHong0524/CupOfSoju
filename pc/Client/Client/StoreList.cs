@@ -7,24 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-<<<<<<< HEAD
-=======
 using Google.Cloud.Firestore;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Storage.V1;
 using Google.Cloud.Firestore.V1;
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
 
 namespace Client
 {
     public partial class StoreList : UserControl
     {
-<<<<<<< HEAD
-        public StoreList()
-        {
-            InitializeComponent();
-            ShowTotal();
-=======
         public static string d_name;
          List<Store> stores = new List<Store>();
       
@@ -32,7 +23,6 @@ namespace Client
         {
             InitializeComponent();
             
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         }
 
         #region detail 테이블 행 선택시 오른쪽에 자료표현
@@ -42,13 +32,8 @@ namespace Client
             {
                 ListView.SelectedListViewItemCollection items = listView1.SelectedItems;
                 ListViewItem lvItem = items[0];
-<<<<<<< HEAD
-                textBox1.Text = lvItem.SubItems[0].Text; //ID
-
-=======
                 textBox1.Text = lvItem.SubItems[2].Text; //ID
                 d_name = textBox1.Text;
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             }
             //pictureBox1.ImageLocation = imgsrc;
         }
@@ -63,29 +48,6 @@ namespace Client
         //   string bar = getDataFromPHP(url + "Building.php");
 
            listView1.Items.Clear();                                // View가 중복조회 되는것을 방지한다.
-<<<<<<< HEAD
-            //state가 0인 경우 리스트 뷰 추가 x
-            #region testcode
-            ListViewItem listitem = new ListViewItem("ID");
-            listitem.SubItems.Add("PWD");
-            listitem.SubItems.Add("NAME");
-            listitem.SubItems.Add("LOCATE");
-            listitem.SubItems.Add("BILL");
-            listitem.SubItems.Add("PHONE");
-            listitem.SubItems.Add("IMAGE");
-            listitem.SubItems.Add("MENU");
-            listitem.SubItems.Add("SIZE");
-            listView1.Items.Add(listitem);
-            #endregion
-
-           
-
-        }
-        #endregion
-
-        #endregion
-
-=======
                                                                    //state가 0인 경우 리스트 뷰 추가 x
             #region testcode
             foreach (var a in stores)
@@ -154,7 +116,6 @@ namespace Client
         #endregion
 
 
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
            
@@ -163,8 +124,6 @@ namespace Client
         private void button2_Click(object sender, EventArgs e)
         {
             //DB 삭제 알고리즘
-<<<<<<< HEAD
-=======
             DeleteDoc();
         }
   
@@ -234,7 +193,6 @@ namespace Client
         private void StoreList_Load(object sender, EventArgs e)
         {
             StoreParse();
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         }
     }
 }

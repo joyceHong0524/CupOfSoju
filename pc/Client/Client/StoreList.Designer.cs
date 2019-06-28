@@ -39,15 +39,8 @@
             this.Lv_Menu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Lv_Size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button2 = new System.Windows.Forms.Button();
-<<<<<<< HEAD
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-=======
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.SuspendLayout();
             // 
             // listView1
@@ -62,16 +55,10 @@
             this.Lv_Image,
             this.Lv_Menu,
             this.Lv_Size});
-<<<<<<< HEAD
-            this.listView1.Location = new System.Drawing.Point(16, 61);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(447, 228);
-=======
             this.listView1.Dock = System.Windows.Forms.DockStyle.Right;
             this.listView1.Location = new System.Drawing.Point(181, 0);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(506, 372);
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -116,45 +103,14 @@
             // 
             // button2
             // 
-<<<<<<< HEAD
-            this.button2.Location = new System.Drawing.Point(486, 241);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
-=======
             this.button2.Location = new System.Drawing.Point(5, 198);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(116, 27);
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.button2.TabIndex = 2;
             this.button2.Text = "가맹점 삭제";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-<<<<<<< HEAD
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(204, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "가맹점리스트";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(486, 210);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 25);
-            this.textBox1.TabIndex = 4;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(485, 61);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 133);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-=======
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(3, 167);
@@ -171,22 +127,11 @@
             this.button1.Text = "새로고침";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             // 
             // StoreList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.listView1);
-            this.Name = "StoreList";
-            this.Size = new System.Drawing.Size(631, 333);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-=======
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
@@ -194,7 +139,6 @@
             this.Name = "StoreList";
             this.Size = new System.Drawing.Size(687, 372);
             this.Load += new System.EventHandler(this.StoreList_Load);
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,10 +148,6 @@
 
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button2;
-<<<<<<< HEAD
-        private System.Windows.Forms.Label label1;
-=======
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ColumnHeader Lv_Id;
         private System.Windows.Forms.ColumnHeader Lv_Pwd;
@@ -218,10 +158,6 @@
         private System.Windows.Forms.ColumnHeader Lv_Image;
         private System.Windows.Forms.ColumnHeader Lv_Menu;
         private System.Windows.Forms.ColumnHeader Lv_Size;
-<<<<<<< HEAD
-        private System.Windows.Forms.PictureBox pictureBox1;
-=======
         private System.Windows.Forms.Button button1;
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
     }
 }

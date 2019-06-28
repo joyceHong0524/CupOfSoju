@@ -7,24 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-<<<<<<< HEAD
-=======
 using Google.Cloud.Firestore;
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
 
 namespace Client
 {
     public partial class Permission : UserControl
     {
-<<<<<<< HEAD
-        public Permission()
-        {
-            InitializeComponent();
-            ShowTotal();
-        }
-        #region total 테이블 정보 ListView에 띄어주기(수정완료)
-
-=======
         List<Store> stores = new List<Store>();
         public Permission()
         {
@@ -34,26 +22,11 @@ namespace Client
         #region total 테이블 정보 ListView에 띄어주기(수정완료)
 
         string u_name;
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         public void ShowTotal()
         {
             //   string bar = getDataFromPHP(url + "Building.php");
 
             listView2.Items.Clear();                                // View가 중복조회 되는것을 방지한다.
-<<<<<<< HEAD
-            //state가 0인 경우 리스트 뷰 추가 
-            #region testcode
-            ListViewItem listitem = new ListViewItem("ID");
-            listitem.SubItems.Add("PWD");
-            listitem.SubItems.Add("NAME");
-            listitem.SubItems.Add("LOCATE");
-            listitem.SubItems.Add("BILL");
-            listitem.SubItems.Add("PHONE");
-            listitem.SubItems.Add("IMAGE");
-            listitem.SubItems.Add("MENU");
-            listitem.SubItems.Add("SIZE");
-            listView2.Items.Add(listitem);
-=======
                                                                     //state가 0인 경우 리스트 뷰 추가 x
             #region testcode
             foreach (var a in stores)
@@ -71,7 +44,6 @@ namespace Client
                 listitem.SubItems.Add(a.size.ToString());
                 listView2.Items.Add(listitem);
             }
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
             #endregion
 
 
@@ -86,11 +58,6 @@ namespace Client
             {
                 ListView.SelectedListViewItemCollection items = listView2.SelectedItems;
                 ListViewItem lvItem = items[0];
-<<<<<<< HEAD
-                textBox1.Text = lvItem.SubItems[0].Text; //ID
-
-            }
-=======
                 textBox1.Text = lvItem.SubItems[2].Text; //ID
                 u_name = textBox1.Text;
 
@@ -129,15 +96,12 @@ namespace Client
             }
             MessageBox.Show("수정 완료");
             StoreParse();
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         }
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
             //가맹 허가 코드
-<<<<<<< HEAD
-=======
             UpdateDoc();
         }
         public async void StoreParse()
@@ -200,7 +164,6 @@ namespace Client
         private void Permission_Load(object sender, EventArgs e)
         {
             StoreParse();
->>>>>>> 0115a4c97f8e563c26cf3cdb6a8602e9dca0ca61
         }
     }
 }
